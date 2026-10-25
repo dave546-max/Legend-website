@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Fred Financial Markets | Trade. Play. Own Your Market.</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b13;--card:#111a2b;--gold:#e9b940;--gold2:#f5d77a;--text:#eaf1ff;--muted:#8896b0;--up:#00ff94;--down:#ff4a6b;--border:#1d2a44}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 5%;border-bottom:1px solid var(--border);background:rgba(7,11,19,0.92);backdrop-filter:blur(18px);position:sticky;top:0;z-index:30}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800} .brand .m{width:38px;height:38px;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#000;display:grid;place-items:center;border-radius:10px;font-weight:900}
+nav{display:flex;gap:14px;align-items:center} .navlink{color:var(--muted);font-size:13px;text-decoration:none}
+.btn{padding:10px 18px;border-radius:999px;font-weight:700;font-size:13px;cursor:pointer;border:1px solid var(--border);background:#0f1930;color:var(--text)} .btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#000;border-color:var(--gold)}
+.hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:32px;padding:44px 5%} .hero h1{font-size:50px;line-height:.9;letter-spacing:-1.8px} .hero h1 span{color:var(--gold)} .hero p{color:var(--muted);margin:16px 0;line-height:1.6;max-width:520px}
+.device{width:100%;border-radius:20px;border:1px solid var(--border);box-shadow:0 20px 60px #0009}
+.auth{background:linear-gradient(180deg,#14203a,#111a2b);border:1px solid var(--border);border-radius:20px;padding:20px;margin-top:16px}
+.tabs{display:flex;background:#0a1222;border-radius:999px;padding:4px;border:1px solid var(--border);margin-bottom:14px} .tabs button{flex:1;padding:9px;border-radius:999px;border:0;background:transparent;color:var(--muted);cursor:pointer;font-weight:700} .tabs button.active{background:var(--text);color:#000}
+.auth input{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#0b1324;color:var(--text);margin-bottom:10px}
+.submit{width:100%;padding:12px;border-radius:12px;border:0;background:linear-gradient(180deg,var(--gold2),var(--gold));font-weight:800;cursor:pointer}
+.grid{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;padding:20px 5%}
+.chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:16px}
+canvas{width:100%;height:360px;background:#0a1324;border-radius:14px;border:1px solid var(--border)}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:16px}
+.prod{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid #15223a}
+.game-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px} .game{background:linear-gradient(160deg,#1a2a4a,#121c32);border:1px solid var(--border);border-radius:14px;padding:12px;cursor:pointer}
+.footer{padding:24px 5%;border-top:1px solid var(--border);display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.hero h1{font-size:34px}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand"><div class="m">FFM</div>FRED FINANCIAL MARKETS</div>
+<nav><a class="navlink" href="#platform">Platform</a><a class="navlink" href="#trade">Original Chart</a><a class="navlink" href="#store">Store</a><button class="btn" onclick="setMode('sign')">Sign In</button><button class="btn btn-gold" onclick="setMode('create')">Create Account</button></nav>
+</header>
+
+<section class="hero" id="platform">
+<div>
+<h1>Trade Digital Products.<br>Play <span>Original Charts.</span><br>Earn Everywhere.</h1>
+<p>Fred Financial Markets runs on our ORIGINAL chart engine — built from scratch, no TradingView. Trade FFM/USDT, buy premium marketing kits, play 4 games. One login works on laptop, tablet & phone.</p>
+<button class="btn btn-gold" onclick="document.getElementById('trade').scrollIntoView({behavior:'smooth'})">Launch Original Chart →</button>
+<div style="display:flex;gap:18px;margin-top:20px;font-family:JetBrains Mono"><div><b style="color:var(--gold)">12.4M</b> <small style="color:var(--muted)">VOL 24H</small></div><div><b style="color:var(--gold)">14K+</b> <small style="color:var(--muted)">TRADERS</small></div><div><b style="color:var(--gold)">100%</b> <small style="color:var(--muted)">ORIGINAL</small></div></div>
+</div>
+<div>
+<img class="device" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900" alt="FFM on all devices"/>
+<div class="auth" id="auth">
+<h3 id="aTitle">Create Your FFM Account</h3>
+<div style="font-size:12px;color:var(--muted);margin-bottom:12px">Trading & marketing in one wallet</div>
+<div class="tabs"><button class="active" id="tC" onclick="setMode('create')">Create Account</button><button id="tS" onclick="setMode('sign')">Sign In</button></div>
+<input id="n" placeholder="Full Name"/>
+<input id="e" placeholder="Email"/>
+<input id="p" type="password" placeholder="Password (8+ chars)"/>
+<button class="submit" id="aBtn" onclick="doAuth()">Create Account & Start Trading</button>
+<div id="msg" style="font-family:JetBrains Mono;font-size:12px;color:var(--gold);margin-top:8px"></div>
+</div>
+</div>
+</section>
+
+<div class="grid" id="trade">
+<div class="chart-wrap">
+<div style="display:flex;justify-content:space-between"><div><div style="font-family:JetBrains Mono;font-size:11px;color:var(--muted)">FFM/USDT • ORIGINAL ENGINE v2.1 • PROVABLY FAIR</div><div id="livePrice" style="font-size:26px;font-weight:800;font-family:JetBrains Mono;color:var(--up)">$1,247.32 ▲ 2.14%</div></div><div style="font-family:JetBrains Mono;font-size:11px;color:var(--muted);text-align:right">LIVE<br><span style="color:var(--up)">● CONNECTED</span></div></div>
+<canvas id="chart" width="900" height="360"></canvas>
+<div style="display:flex;gap:8px;margin-top:10px"><button class="btn">1m</button><button class="btn">5m</button><button class="btn">1H</button><div style="margin-left:auto;display:flex;gap:8px"><button class="btn" style="background:var(--up);color:#000;font-weight:800" id="up">▲ LONG</button><button class="btn" style="background:var(--down);color:#fff;font-weight:800" id="down">▼ SHORT</button></div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:18px">
+<div class="panel" id="store"><div style="font-family:JetBrains Mono;font-size:11px;color:var(--muted);margin-bottom:8px">DIGITAL STORE - PAYSTACK READY</div>
+<div class="prod"><div><b>SEO Super Pack</b><div style="font-size:11px;color:var(--muted)">AI + Audits</div></div><div style="text-align:right"><div style="font-family:JetBrains Mono">₦75k</div><button class="btn" style="font-size:11px;padding:4px 8px;color:var(--gold);border-color:var(--gold)" onclick="buy('SEO')">BUY</button></div></div>
+<div class="prod"><div><b>Viral Reels Bundle</b><div style="font-size:11px;color:var(--muted)">100 templates</div></div><div style="text-align:right"><div style="font-family:JetBrains Mono">₦44.5k</div><button class="btn" style="font-size:11px;padding:4px 8px;color:var(--gold);border-color:var(--gold)" onclick="buy('Reels')">BUY</button></div></div>
+<div class="prod"><div><b>AdSense Kit</b><div style="font-size:11px;color:var(--muted)">Funnels + Tracking</div></div><div style="text-align:right"><div style="font-family:JetBrains Mono">₦120k</div><button class="btn" style="font-size:11px;padding:4px 8px;color:var(--gold);border-color:var(--gold)" onclick="buy('AdSense')">BUY</button></div></div>
+</div>
+<div class="panel"><div style="font-family:JetBrains Mono;font-size:11px;color:var(--muted);margin-bottom:8px">EXCITING GAMES</div><div class="game-grid"><div class="game" onclick="play('predict')"><b>🎯 Predictor</b><div style="font-size:11px;color:var(--muted)">Win 2x</div></div><div class="game" onclick="play('crash')"><b>🚀 Crash</b><div style="font-size:11px;color:var(--muted)">Cash out</div></div><div class="game" onclick="play('spin')"><b>🎰 Spin</b><div style="font-size:11px;color:var(--muted)">Bonus</div></div><div class="game" onclick="play('battle')"><b>⚔️ Battle</b><div style="font-size:11px;color:var(--muted)">1v1</div></div></div><div id="gameResult" style="margin-top:10px;font-family:JetBrains Mono;font-size:12px;color:var(--gold)"></div></div>
+</div>
+</div>
+
+<div class="footer"><div>© 2026 Fred Financial Markets • Original Engine v2.1</div><div>Paystack • Flutterwave • USDT • Onitsha, NG</div></div>
+
+<script>
+function setMode(m){document.getElementById('tC').classList.toggle('active',m==='create');document.getElementById('tS').classList.toggle('active',m==='sign');document.getElementById('aTitle').textContent=m==='create'?'Create Your FFM Account':'Welcome Back';document.getElementById('aBtn').textContent=m==='create'?'Create Account & Start Trading':'Sign In & Continue';document.getElementById('n').style.display=m==='create'?'block':'none';document.getElementById('auth').scrollIntoView({behavior:'smooth'})
